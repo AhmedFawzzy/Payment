@@ -1,0 +1,127 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║         🎉 SWAGGER UI - QUICK START GUIDE 🎉                 ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────┐
+│  ⚡ START THE API                                             │
+└───────────────────────────────────────────────────────────────┘
+
+    cd Payment_Backend
+    dotnet run
+
+┌───────────────────────────────────────────────────────────────┐
+│  🌐 OPEN SWAGGER UI                                           │
+└───────────────────────────────────────────────────────────────┘
+
+    Browser: https://localhost:7014
+    
+    Alternative: http://localhost:5000
+
+┌───────────────────────────────────────────────────────────────┐
+│  📚 AVAILABLE ENDPOINTS                                       │
+└───────────────────────────────────────────────────────────────┘
+
+    📦 PRODUCTS (4 endpoints)
+    ├─ GET  /api/products                    All products
+    ├─ GET  /api/products/subscriptions      Subscriptions
+    ├─ GET  /api/products/one-time           One-time items
+    └─ GET  /api/products/{id}               Specific product
+
+    💳 PURCHASES (4 endpoints)
+    ├─ POST /api/purchases/validate          Validate receipt
+    ├─ GET  /api/purchases/history/{userId}  Purchase history
+    ├─ GET  /api/purchases/{purchaseId}      Get purchase
+    └─ POST /api/purchases/{id}/acknowledge  Acknowledge
+
+    📅 SUBSCRIPTIONS (3 endpoints)
+    ├─ GET  /api/subscriptions/active/{id}   Active sub
+    ├─ GET  /api/subscriptions/history/{id}  Sub history
+    └─ POST /api/subscriptions/{id}/cancel   Cancel sub
+
+┌───────────────────────────────────────────────────────────────┐
+│  🧪 TEST AN ENDPOINT                                          │
+└───────────────────────────────────────────────────────────────┘
+
+    1. Click on any endpoint (e.g., GET /api/products)
+    2. Click "Try it out" button
+    3. Modify parameters if needed
+    4. Click "Execute" button
+    5. See the response!
+
+┌───────────────────────────────────────────────────────────────┐
+│  🎯 EXAMPLE: GET ALL PRODUCTS                                 │
+└───────────────────────────────────────────────────────────────┘
+
+    1. Open: https://localhost:7014
+    2. Find: GET /api/products
+    3. Click: "Try it out"
+    4. Click: "Execute"
+    5. Result: 5 products returned! ✅
+
+┌───────────────────────────────────────────────────────────────┐
+│  💾 CONFIGURED PRODUCTS                                       │
+└───────────────────────────────────────────────────────────────┘
+
+    SUBSCRIPTIONS:
+    ├─ pro_monthly   → $4.99/mo  (Monthly Plan)
+    └─ pro_yearly    → $49.99/yr (Yearly Plan) ⭐ BEST VALUE
+
+    ONE-TIME PURCHASES:
+    ├─ remove_ads    → $2.99  (Remove Ads)
+    ├─ coin_pack_500 → $0.99  (Coin Pack)
+    └─ super_boost   → $1.99  (Super Boost)
+
+┌───────────────────────────────────────────────────────────────┐
+│  ✨ SWAGGER UI FEATURES                                       │
+└───────────────────────────────────────────────────────────────┘
+
+    ✅ Interactive API testing
+    ✅ Live documentation
+    ✅ Request/response examples
+    ✅ Data model schemas
+    ✅ cURL command generation
+    ✅ Request duration tracking
+    ✅ Beautiful, intuitive interface
+
+┌───────────────────────────────────────────────────────────────┐
+│  🔧 TROUBLESHOOTING                                           │
+└───────────────────────────────────────────────────────────────┘
+
+    ❌ Swagger not loading?
+       → Check backend is running
+       → Try: https://localhost:7014
+       → Verify you're in Development mode
+
+    ❌ Can't execute requests?
+       → Refresh the page
+       → Check backend console for errors
+       → Verify port number matches
+
+    ❌ CORS errors?
+       → Already configured! Should work fine.
+
+┌───────────────────────────────────────────────────────────────┐
+│  📖 MORE INFORMATION                                          │
+└───────────────────────────────────────────────────────────────┘
+
+    Full Guide: Payment_Backend/SWAGGER_GUIDE.md
+    Details:    Payment_Backend/SWAGGER_IMPLEMENTED.md
+
+┌───────────────────────────────────────────────────────────────┐
+│  🎉 YOU'RE READY!                                             │
+└───────────────────────────────────────────────────────────────┘
+
+    Start exploring your API with Swagger UI!
+    
+    → Run backend
+    → Open https://localhost:7014
+    → Start testing!
+
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║              Happy API Testing! 🚀                           ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+

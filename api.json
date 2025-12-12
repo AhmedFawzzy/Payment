@@ -1,0 +1,688 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Payment API",
+      "description": "A comprehensive payment system API for managing products, purchases, and subscriptions",
+      "contact": {
+        "name": "Payment API Support",
+        "email": "support@payment.com"
+      },
+      "license": {
+        "name": "MIT License",
+        "url": "https://opensource.org/licenses/MIT"
+      },
+      "version": "v1"
+    },
+    "paths": {
+      "/api/Products": {
+        "get": {
+          "tags": [
+            "Products"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Products/subscriptions": {
+        "get": {
+          "tags": [
+            "Products"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Products/one-time": {
+        "get": {
+          "tags": [
+            "Products"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Products/{id}": {
+        "get": {
+          "tags": [
+            "Products"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Purchases/validate": {
+        "post": {
+          "tags": [
+            "Purchases"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateReceiptRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateReceiptRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateReceiptRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PurchaseResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PurchaseResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Purchases/history/{userId}": {
+        "get": {
+          "tags": [
+            "Purchases"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Purchase"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Purchases/{purchaseId}": {
+        "get": {
+          "tags": [
+            "Purchases"
+          ],
+          "parameters": [
+            {
+              "name": "purchaseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Purchase"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Purchases/{purchaseId}/acknowledge": {
+        "post": {
+          "tags": [
+            "Purchases"
+          ],
+          "parameters": [
+            {
+              "name": "purchaseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Subscriptions/active/{userId}": {
+        "get": {
+          "tags": [
+            "Subscriptions"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Subscriptions/history/{userId}": {
+        "get": {
+          "tags": [
+            "Subscriptions"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Subscription"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/Subscriptions/{subscriptionId}/cancel": {
+        "post": {
+          "tags": [
+            "Subscriptions"
+          ],
+          "parameters": [
+            {
+              "name": "subscriptionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Platform": {
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "type": "integer",
+          "format": "int32"
+        },
+        "ProblemDetails": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "nullable": true
+            },
+            "title": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "detail": {
+              "type": "string",
+              "nullable": true
+            },
+            "instance": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": { }
+        },
+        "Product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "name": {
+              "type": "string",
+              "nullable": true
+            },
+            "description": {
+              "type": "string",
+              "nullable": true
+            },
+            "price": {
+              "type": "number",
+              "format": "double"
+            },
+            "type": {
+              "$ref": "#/components/schemas/ProductType"
+            },
+            "subscriptionPeriod": {
+              "$ref": "#/components/schemas/SubscriptionPeriod"
+            },
+            "iconName": {
+              "type": "string",
+              "nullable": true
+            },
+            "iconColor": {
+              "type": "string",
+              "nullable": true
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "isBestValue": {
+              "type": "boolean"
+            },
+            "savePercentage": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "hasFreeTrial": {
+              "type": "boolean"
+            },
+            "freeTrialDays": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "androidProductId": {
+              "type": "string",
+              "nullable": true
+            },
+            "iosProductId": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "ProductType": {
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "type": "integer",
+          "format": "int32"
+        },
+        "Purchase": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "userId": {
+              "type": "string",
+              "nullable": true
+            },
+            "productId": {
+              "type": "string",
+              "nullable": true
+            },
+            "transactionId": {
+              "type": "string",
+              "nullable": true
+            },
+            "amount": {
+              "type": "number",
+              "format": "double"
+            },
+            "currency": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "$ref": "#/components/schemas/PurchaseStatus"
+            },
+            "platform": {
+              "$ref": "#/components/schemas/Platform"
+            },
+            "purchaseDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "expiryDate": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "purchaseToken": {
+              "type": "string",
+              "nullable": true
+            },
+            "receipt": {
+              "type": "string",
+              "nullable": true
+            },
+            "isAcknowledged": {
+              "type": "boolean"
+            },
+            "paymentMethod": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "PurchaseResponse": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true
+            },
+            "purchase": {
+              "$ref": "#/components/schemas/Purchase"
+            },
+            "subscription": {
+              "$ref": "#/components/schemas/Subscription"
+            }
+          },
+          "additionalProperties": false
+        },
+        "PurchaseStatus": {
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "integer",
+          "format": "int32"
+        },
+        "Subscription": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "userId": {
+              "type": "string",
+              "nullable": true
+            },
+            "productId": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "$ref": "#/components/schemas/SubscriptionStatus"
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "expiryDate": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "nextBillingDate": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "autoRenew": {
+              "type": "boolean"
+            },
+            "isInTrialPeriod": {
+              "type": "boolean"
+            },
+            "trialEndDate": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            },
+            "currentPurchaseId": {
+              "type": "string",
+              "nullable": true
+            },
+            "purchaseHistory": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "SubscriptionPeriod": {
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer",
+          "format": "int32"
+        },
+        "SubscriptionStatus": {
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "integer",
+          "format": "int32"
+        },
+        "ValidateReceiptRequest": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "nullable": true
+            },
+            "productId": {
+              "type": "string",
+              "nullable": true
+            },
+            "transactionId": {
+              "type": "string",
+              "nullable": true
+            },
+            "platform": {
+              "$ref": "#/components/schemas/Platform"
+            },
+            "purchaseToken": {
+              "type": "string",
+              "nullable": true
+            },
+            "receipt": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:converters="clr-namespace:Payment_Mobile.Converters">
+
+    <!-- Boolean Converters -->
+    <converters:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
+    <converters:SelectedBackgroundConverter x:Key="SelectedBackgroundConverter"/>
+    <converters:UnselectedBackgroundConverter x:Key="UnselectedBackgroundConverter"/>
+    <converters:SelectedTextColorConverter x:Key="SelectedTextColorConverter"/>
+    <converters:UnselectedTextColorConverter x:Key="UnselectedTextColorConverter"/>
+    <converters:NotNullConverter x:Key="NotNullConverter"/>
+
+    <!-- Product Converters -->
+    <converters:BestValueBorderConverter x:Key="BestValueBorderConverter"/>
+    <converters:BestValueStrokeConverter x:Key="BestValueStrokeConverter"/>
+    <converters:ButtonTextConverter x:Key="ButtonTextConverter"/>
+    <converters:IconColorConverter x:Key="IconColorConverter"/>
+    <converters:IconConverter x:Key="IconConverter"/>
+
+</ResourceDictionary>
+

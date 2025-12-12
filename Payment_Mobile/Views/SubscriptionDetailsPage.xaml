@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Payment_Mobile.ViewModels"
+             x:Class="Payment_Mobile.Views.SubscriptionDetailsPage"
+             x:DataType="vm:SubscriptionDetailsViewModel"
+             BackgroundColor="{StaticResource BackgroundLight}"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Top App Bar -->
+        <Grid Grid.Row="0" 
+              Padding="16,10"
+              ColumnDefinitions="Auto,*,Auto"
+              BackgroundColor="{StaticResource BackgroundLight}">
+            <Button Grid.Column="0"
+                    Text="←"
+                    FontSize="24"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Gray900}"
+                    Command="{Binding GoBackCommand}"/>
+            <Button Grid.Column="2"
+                    Text="Restore"
+                    FontSize="14"
+                    TextColor="{StaticResource Gray500}"
+                    BackgroundColor="Transparent"
+                    Command="{Binding RestorePurchasesCommand}"/>
+        </Grid>
+
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="24" Padding="16,0">
+                <!-- Hero Image -->
+                <Border HeightRequest="240"
+                        StrokeThickness="0"
+                        BackgroundColor="{StaticResource Primary}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Opacity="0.1" Radius="10" Offset="0,4"/>
+                    </Border.Shadow>
+                    <Grid>
+                        <Label Text="👑"
+                               FontSize="80"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Headlines -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Unlock Premium"
+                           FontSize="32"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Get unlimited access to all courses, offline viewing, and an ad-free experience."
+                           FontSize="16"
+                           TextColor="{StaticResource Gray500}"
+                           HorizontalTextAlignment="Center"
+                           LineHeight="1.4"/>
+                </VerticalStackLayout>
+
+                <!-- Segmented Control (Pricing Toggle) -->
+                <Border Padding="4"
+                        BackgroundColor="{StaticResource Gray200}"
+                        StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+
+                    <Grid ColumnDefinitions="*,*" HeightRequest="48">
+                        <Border Grid.Column="0"
+                                BackgroundColor="{Binding IsMonthlySelected, Converter={StaticResource SelectedBackgroundConverter}}"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectPlanCommand}" 
+                                                    CommandParameter="Monthly"/>
+                            </Border.GestureRecognizers>
+                            <Label Text="Monthly"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="{Binding IsMonthlySelected, Converter={StaticResource SelectedTextColorConverter}}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                BackgroundColor="{Binding IsMonthlySelected, Converter={StaticResource UnselectedBackgroundConverter}}"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8"/>
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectPlanCommand}" 
+                                                    CommandParameter="Yearly"/>
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout HorizontalOptions="Center" 
+                                                 VerticalOptions="Center" 
+                                                 Spacing="8">
+                                <Label Text="Yearly"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="{Binding IsMonthlySelected, Converter={StaticResource UnselectedTextColorConverter}}"/>
+                                <Border BackgroundColor="#16A34A"
+                                        Padding="6,2"
+                                        StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="4"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="SAVE 20%"
+                                           FontSize="10"
+                                           FontAttributes="Bold"
+                                           TextColor="White"/>
+                                </Border>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Pricing Display -->
+                <VerticalStackLayout Spacing="4">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                        <Label Text="{Binding SelectedPrice}"
+                               FontSize="40"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}"/>
+                        <Label Text="{Binding SelectedPeriod, StringFormat='/ {0}'}"
+                               FontSize="18"
+                               TextColor="{StaticResource Gray500}"
+                               VerticalOptions="End"
+                               Margin="0,0,0,6"/>
+                    </HorizontalStackLayout>
+                    <Label Text="Billed annually, cancel anytime."
+                           FontSize="12"
+                           TextColor="{StaticResource Gray400}"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Features List -->
+                <VerticalStackLayout Spacing="16" Padding="8,0">
+                    <!-- Feature 1 -->
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                        <Border Grid.Column="0"
+                                WidthRequest="28"
+                                HeightRequest="28"
+                                BackgroundColor="{StaticResource Primary}"
+                                Opacity="0.1"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14"/>
+                            </Border.StrokeShape>
+                        </Border>
+                        <Label Grid.Column="0"
+                               Text="✓"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="Unlimited Access"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Gray900}"/>
+                            <Label Text="Watch all video courses without limits."
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray500}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Feature 2 -->
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                        <Border Grid.Column="0"
+                                WidthRequest="28"
+                                HeightRequest="28"
+                                BackgroundColor="{StaticResource Primary}"
+                                Opacity="0.1"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14"/>
+                            </Border.StrokeShape>
+                        </Border>
+                        <Label Grid.Column="0"
+                               Text="✓"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="Offline Viewing"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Gray900}"/>
+                            <Label Text="Download videos to watch anywhere."
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray500}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Feature 3 -->
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                        <Border Grid.Column="0"
+                                WidthRequest="28"
+                                HeightRequest="28"
+                                BackgroundColor="{StaticResource Primary}"
+                                Opacity="0.1"
+                                StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14"/>
+                            </Border.StrokeShape>
+                        </Border>
+                        <Label Grid.Column="0"
+                               Text="✓"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="Ad-free Experience"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Gray900}"/>
+                            <Label Text="Focus on learning with zero interruptions."
+                                   FontSize="14"
+                                   TextColor="{StaticResource Gray500}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="80"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Sticky Footer -->
+        <Border Grid.Row="2"
+                Padding="16,12"
+                BackgroundColor="{StaticResource BackgroundLight}"
+                Opacity="0.95">
+            <Border.Shadow>
+                <Shadow Brush="Black" Opacity="0.1" Radius="10" Offset="0,-4"/>
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="12">
+                <Button Text="Start 7-Day Free Trial"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        CornerRadius="12"
+                        HeightRequest="56"
+                        Command="{Binding StartTrialCommand}"
+                        IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+                    <Button.Shadow>
+                        <Shadow Brush="{StaticResource Primary}" Opacity="0.3" Radius="12" Offset="0,4"/>
+                    </Button.Shadow>
+                </Button>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="12">
+                    <Label Text="Restore Purchases"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray400}"
+                           TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RestorePurchasesCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="•" FontSize="11" TextColor="{StaticResource Gray400}"/>
+                    <Label Text="Terms"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray400}"
+                           TextDecorations="Underline"/>
+                    <Label Text="•" FontSize="11" TextColor="{StaticResource Gray400}"/>
+                    <Label Text="Privacy"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray400}"
+                           TextDecorations="Underline"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Loading Overlay -->
+        <Grid Grid.RowSpan="3"
+              IsVisible="{Binding IsLoading}"
+              BackgroundColor="#80000000">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             Color="White"
+                             WidthRequest="50"
+                             HeightRequest="50"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"/>
+        </Grid>
+    </Grid>
+</ContentPage>
+

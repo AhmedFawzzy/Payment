@@ -21,8 +21,6 @@ Full Stack & .NET Developer | with a passion for building high-quality software 
 
 📈 Connect with Me:
 
-Visit my [Upwork profile](https://www.upwork.com)
-
-Connect with me on [LinkedIn](https://www.linkedin.com)
+Connect with me on [LinkedIn](https://www.linkedin.com/in/ahmed-fawzy-069a7a319)
 
 💬 Let's Build Something Amazing Together!
